@@ -1,9 +1,23 @@
-FROM node:23-slim
+FROM node:23-slim AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --omit=dev
+RUN npm install
+
 COPY . .
+
 RUN npm run build
-EXPOSE 3003
+
+FROM node:23-slim
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install --omit=dev
+
+COPY --from=builder /app/dist ./dist
+
+EXPOSE 4001
+
 ENV NODE_ENV production
+
 CMD [ "node", "dist/index.js" ]
