@@ -27,15 +27,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/post-service:latest
-          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/post-service:cache
-          cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/post-service:cache,mode=max
-
-      # - name: Build and push PostgreSQL image
-      #   uses: docker/build-push-action@v3
-      #   with:
-      #     context: ./db
-      #     push: true
-      #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/post-service-db:${{ github.sha }}
-      #     cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/post-service-db:cache
-      #     cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/post-service-db:cache,mode=max
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/search-service:latest
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/search-service:cache
+          cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/search-service:cache,mode=max
